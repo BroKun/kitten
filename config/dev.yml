@@ -6,21 +6,25 @@ staticServer:
  maxage: 5000
  hidden: false
  index: 'index.html'
-
-env:
+key: 'brokun'
 secret: 'brokun'
 port: 8000
 
-sessionAge: 30 #minute
-tokenExp: 60 #minutes
-tokenLongExp: 90 #minutes 60*24*30=43200 30天免登陆
-tokenRolling:
- - 30
- - 'minutes'
-sessionStore:
- redis:
-  host: 127.0.0.1
-  port: 6379
-  password: 'brokun'
- option:
-  prefix: 'online:'
+
+env:
+
+# token:
+#   tokenExp: 60 #minutes
+#   tokenLongExp: 90 #minutes 60*24*30=43200 30天免登陆
+#   tokenRolling:
+#     - 30
+#     - 'minutes'
+
+# session:
+#   sessionAge: 30 #minute
+#   sessionStore:
+#     prefix: 'online:'
+#     redis:
+#       host: 127.0.0.1
+#       port: 6379
+#       password: 'brokun'
