@@ -2,13 +2,15 @@
 const Router = require('koa-router');
 const path = require('path');
 const dynamicAPI = require('../common/dynamicAPI');
-// const mockAPI = require('../common/mockAPI');
 const multer = require('koa-multer');
 
-function init() {
+module.exports = function() {
   const routes = new Router();
   const uploadMidware = multer({ dest: path.join(global.app.config.rootDir, global.app.config.commonFilePath) });
 
+/**
+ * 一般数据查询接口
+ */
   routes.post('/api/:version/:service/:action', async (ctx, next) => {
     const version = ctx.params.version;
     const service = ctx.params.service;
@@ -30,5 +32,4 @@ function init() {
     ctx.body = result;
   });
   return routes;
-}
-module.exports = init;
+};
