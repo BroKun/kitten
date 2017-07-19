@@ -1,24 +1,24 @@
-/**
- * 构建错误返回值对象
- */
+'use strict';
+
+
+// 构建错误返回值对象
 function ErrorRes(code, message) {
   this.requestId = null;
   this.type = 'ServerError';
   this.code = code;
   this.message = message;
 }
-/**
- * 构建错误返回值对象
- */
+
+// 构建错误返回值对象
+
 function ListRes(data) {
   this.requestId = null;
   this.code = null;
   this.message = null;
   this.dataList = data;
 }
-/**
- * 构建返回值对象
- */
+
+// 构建返回值对象
 function DataRes(...datas) {
   let requestId = null;
   let code = null;
@@ -61,12 +61,8 @@ function NoteBase(service, action, params) {
 }
 
 function ServiceNote(...params) {
-  NoteBase.call(this, ...params)
+  NoteBase.call(this, ...params);
   this.type = 'service';
 }
-function OpenNote(...params) {
-  NoteBase.call(this, ...params)
-  this.type = 'openAPI';
-}
 
-module.exports = { ListRes, DataRes, ErrorRes, ServiceNote, OpenNote, }
+module.exports = { ListRes, DataRes, ErrorRes, ServiceNote };

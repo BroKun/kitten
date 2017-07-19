@@ -1,12 +1,13 @@
+'use strict';
 const uuid = require('uuid');
 const log = require('../common/socket');
 
-const formatDebugInfo = (debugInfo) => {
+const formatDebugInfo = debugInfo => {
   debugInfo.spend = debugInfo.endTime - debugInfo.startTime;
   debugInfo.requests.sort((a, b) => {
     return a.startTime - b.startTime;
-  })
-  debugInfo.requests.map((item) => {
+  });
+  debugInfo.requests.map(item => {
     if (item.endTime) item.spend = item.endTime - item.startTime;
     return item;
   });
@@ -22,9 +23,9 @@ const midware = async (ctx, next) => {
   const ms = ctx.debugInfo.endTime - ctx.debugInfo.startTime;
   ctx.set('X-Response-Time', `${ms}ms`);
   log.info(formatDebugInfo(ctx.debugInfo));
-}
+};
 
-const initLogger = (app) => {
+const initLogger = app => {
   log.init(app);
   return midware;
 };

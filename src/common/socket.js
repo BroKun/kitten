@@ -1,17 +1,18 @@
+'use strict';
 const socketio = require('socket.io');
 const log4js = require('log4js');
 
 const log = log4js.getLogger('socket');
 
 let io = null;
-const init = (http) => {
+const init = http => {
   io = socketio(http);
-  //socket连接
-  io.on('connection', (socket) => {
+  // socket连接
+  io.on('connection', socket => {
     log.info(`websocket: connected ${socket.id}`);
     socket.emit('sys', 'now, Tell me your choice');
     socket.emit('choice', '');
-    socket.on('choice', (msg) => {
+    socket.on('choice', msg => {
       if (msg === 'log') {
         socket.emit('sys', 'wise choice');
       }
@@ -22,11 +23,11 @@ const init = (http) => {
       socket.leave('log');
     });
   });
-}
+};
 
-const info = (data, room = 'log') => {
+const info = data => {
   if (!io) { return; }
   io.to('log').emit('info', data);
-}
+};
 
-module.exports = { init, info, };
+module.exports = { init, info };

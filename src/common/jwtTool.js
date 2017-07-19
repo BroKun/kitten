@@ -1,14 +1,15 @@
+'use strict';
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const log4js = require('log4js');
 
 const log = log4js.getLogger('jwtTool');
-function sign(data, secret, { exp = 1, }) {
+function sign(data, secret, { exp = 1 } = {}) {
   const iat = moment().unix();
-  let expTime = moment.unix(iat).add(global.config.tokenExp, 'minutes').unix();
+  let expTime = moment.unix(iat).add(global.app.config.token.tokenExp, 'minutes').unix();
   try {
     const intExp = parseInt(exp, 10);
-    if (intExp === 30) expTime = moment.unix(iat).add(global.config.tokenLongExp, 'minutes').unix();
+    if (intExp === 30) expTime = moment.unix(iat).add(global.app.config.token.tokenLongExp, 'minutes').unix();
   } catch (ex) {
     log.error(`解析登录信息exp出错 exp：${exp}`);
   }
@@ -19,8 +20,8 @@ function sign(data, secret, { exp = 1, }) {
       expParam: exp,
     },
   });
-  const token = jwt.sign(useInfo, global.config.secret);
+  const token = jwt.sign(useInfo, global.app.config.secret);
   return token;
 }
 
-module.exports = { sign, };
+module.exports = { sign };

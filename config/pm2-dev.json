@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "dev",
+      "name": "web-3.1-dev",
       "cwd": "./",
       "max_memory_restart": "300M",
       "script": "./app.js",
