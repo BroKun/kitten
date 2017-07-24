@@ -27,4 +27,4 @@ redisStore:
  redis:
   host: 127.0.0.1
   port: 6379
-  password: 'hzzh2017'
+  password: 'brokun'
